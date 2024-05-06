@@ -1,3 +1,19 @@
-export const register = (req, res) => res.send('register test endpoint')
+import User from '../models/user.model.js'
+
+export const register = async (req, res) => {
+    const { email, password, username } = req.body
+
+    try {
+        const newUser = new User({
+            email,
+            password,
+            username,
+        })
+        const userSaved = await newUser.save()
+        res.send(userSaved)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const login = (req, res) => res.send('login test endpoin')
