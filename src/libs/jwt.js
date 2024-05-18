@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 
 export function createAccessToken(payload) {
     return new Promise((resolve, reject) => {
-        JsonWebTokenError.sign(
+        jwt.sign(
             payload,
             TOKEN_SECRET,
             {
