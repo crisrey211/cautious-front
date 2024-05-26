@@ -1,18 +1,20 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { registerRequest } from '../api/auth.js'
+import { registerRequest } from '../api/auth'
 
 const RegisterPage = () => {
     const { register, handleSubmit } = useForm()
+
+    const onSubmit = handleSubmit(async (values) => {
+        const res = await registerRequest(values)
+        console.log('respuesta', res)
+    })
 
     return (
         <div className="w-full max-w-xs">
             <form
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                onSubmit={handleSubmit(async (values) => {
-                    const res = await registerRequest(values)
-                    console.log('respuesta', res)
-                })}
+                onSubmit={onSubmit}
             >
                 <div className="mb-4">
                     <input
