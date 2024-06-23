@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
-            unique: true,
+            /*  unique: true, */
         },
         password: {
             type: String,
@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
+        versionKey: false,
     }
 )
 
