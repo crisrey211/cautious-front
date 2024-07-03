@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { registerRequest } from '../api/auth'
 
 const RegisterPage = () => {
     const {
@@ -74,6 +73,12 @@ const RegisterPage = () => {
                     </button>
                 </div>
             </form>
+            <p className="flex gap-x-2 justify-between">
+                Already have an account?
+                <Link to={'/login'} className="text-sky-500">
+                    Sign up
+                </Link>
+            </p>
         </div>
     )
 }
