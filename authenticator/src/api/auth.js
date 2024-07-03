@@ -11,3 +11,13 @@ export const registerRequest = async (user) => {
         throw error // Lanza el error para que pueda ser manejado por el llamador
     }
 }
+
+export const loginRequest = async (user) => {
+    try {
+        const response = await axios.post(`${API}/login`, user)
+        return response
+    } catch (error) {
+        console.log('Error during de login:', error)
+        throw error
+    }
+}
