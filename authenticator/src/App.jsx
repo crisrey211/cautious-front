@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import { AuthProvider } from './context/AuthContext'
-import { TaskPage } from './pages/TaskPage'
-import { TaskFormPage } from './pages/TaskFormPage'
-import { ProfilePage } from './pages/ProfilePage'
+import TaskPage from './pages/TaskPage'
+import TaskFormPage from './pages/TaskFormPage'
+import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './ProtectedRoute'
 function App() {
     return (

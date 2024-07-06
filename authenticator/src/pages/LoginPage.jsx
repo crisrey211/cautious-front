@@ -11,7 +11,7 @@ const LoginPage = () => {
     } = useForm()
 
     const { signin, errors: singupErrors } = useAuth()
-
+    console.log('object', singupErrors)
     const onSubmit = handleSubmit((data) => {
         signin(data)
     })
