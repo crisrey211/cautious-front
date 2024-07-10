@@ -22,3 +22,5 @@ export const loginRequest = async (user) => {
         throw error
     }
 }
+
+export const VerifyTokenRequest = () => axios.get('/verify')
