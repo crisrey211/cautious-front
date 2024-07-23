@@ -1,10 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import {
-    loginRequest,
-    registerRequest,
-    VerifyTokenRequest,
-} from '../api/auth.js'
+import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth'
 import Cookie from 'js-cookie'
+
 export const AuthContext = createContext()
 
 export const useAuth = () => {
@@ -19,14 +16,17 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errors, setErrors] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
     const signup = async (user) => {
         try {
             const res = await registerRequest(user)
             setUser(res.data)
             setIsAuthenticated(true)
+            setLoading(false)
         } catch (error) {
             setErrors(error.response.data)
+            setLoading(false)
         }
     }
 
@@ -36,49 +36,70 @@ export const AuthProvider = ({ children }) => {
             console.log(res)
             setIsAuthenticated(true)
             setUser(res.data)
+            setLoading(false)
         } catch (error) {
             setErrors(error.response.data)
             console.error(error)
+            setLoading(false)
         }
     }
 
     useEffect(() => {
         if (errors.length > 0) {
-            const timer = setInterval(() => {
+            const timer = setTimeout(() => {
                 setErrors([])
             }, 7000)
             return () => clearTimeout(timer)
         }
     }, [errors])
 
-    //Se tiene que actualizar el navegador para ver la respuesta de la cookie.
     useEffect(() => {
-        async function checkLogin() {
+        const checkLogin = async () => {
             const cookies = Cookie.get()
-            /* console.log(cookies) */
+            console.log('cookies ==>', cookies)
 
             if (!cookies.token) {
-                /* console.log(cookies.token) */
-                setIsAuthenticated(false)
-                return setUser(null)
-            }
-            try {
-                const res = await VerifyTokenRequest(cookies.token)
-                if (!res.data) return setIsAuthenticated(false)
-
-                setIsAuthenticated(true)
-                setUser(res.data)
-            } catch (error) {
+                console.log('No hay token')
                 setIsAuthenticated(false)
                 setUser(null)
+                setLoading(false)
+                return
+            }
+
+            try {
+                const res = await verifyTokenRequest(cookies.token)
+                console.log('Respuesta:', res)
+
+                if (res.data) {
+                    setIsAuthenticated(true)
+                    setUser(res.data)
+                } else {
+                    setIsAuthenticated(false)
+                    setUser(null)
+                }
+            } catch (error) {
+                console.error(error)
+                setIsAuthenticated(false)
+                setUser(null)
+            } finally {
+                setLoading(false)
             }
         }
+
+        console.log('Lanzar checkLogin')
         checkLogin()
     }, [])
 
     return (
         <AuthContext.Provider
-            value={{ signup, user, signin, isAuthenticated, errors }}
+            value={{
+                signup,
+                user,
+                signin,
+                isAuthenticated,
+                errors,
+                isLoading,
+            }}
         >
             {children}
         </AuthContext.Provider>

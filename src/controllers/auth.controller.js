@@ -92,15 +92,22 @@ export const verifyToken = async (req, res) => {
         if (error)
             return res.status(401).json({ message: 'Token Unauthorized' })
 
-        //User Authenticated
-        const userFound = await User.findById(user.id)
-        if (!userFound)
-            return res.status(401).json({ message: 'Token Unauthorized' })
+        // User Authenticated
+        try {
+            const userFound = await User.findById(user.id)
+            if (!userFound) {
+                return res.status(401).json({ message: 'Token Unauthorized' })
+            }
 
-        return {
-            id: userFound._id,
-            username: userFound.username,
-            email: userFound.email,
+            // Send user information as a response
+            return res.status(200).json({
+                id: userFound._id,
+                username: userFound.username,
+                email: userFound.email,
+            })
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json({ message: 'Server Error' })
         }
     })
 }
