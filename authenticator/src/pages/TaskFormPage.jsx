@@ -1,14 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useTask } from '../context/TaskContext'
+import { useTask } from '../context/TasksContext'
 
 const TaskFormPage = () => {
     const { register, handleSubmit } = useForm()
-    const { tasks } = useTask()
-    console.log("Array  Task =>", tasks);
+    const { createTask } = useTask()
 
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
+        createTask(data)
     })
 
     return (
@@ -27,7 +26,7 @@ const TaskFormPage = () => {
                     placeholder="Description"
                     {...register('description')}
                 />
-                <button>Save</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
             </form>
         </div>
     )

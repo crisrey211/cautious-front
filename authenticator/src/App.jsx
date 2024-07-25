@@ -6,7 +6,7 @@ import TaskPage from './pages/TaskPage'
 import TaskFormPage from './pages/TaskFormPage'
 import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './ProtectedRoute'
-import { TaskProvider } from './context/TaskContext'
+import { TaskProvider } from './context/TasksContext'
 function App() {
     return (
         <AuthProvider>
