@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
     const {
@@ -10,11 +10,17 @@ const LoginPage = () => {
         formState: { errors },
     } = useForm()
 
-    const { signin, errors: singupErrors } = useAuth()
-    console.log('object', singupErrors)
+    const { signin, errors: singupErrors, isAuthenticated } = useAuth()
+    const navigate = useNavigate()
+
     const onSubmit = handleSubmit((data) => {
         signin(data)
     })
+
+    //when login is correct navigate to Tasks Page
+    useEffect(() => {
+        if (isAuthenticated) navigate("/tasks")
+    }, [isAuthenticated])
 
     return (
         <div className="flex items-center h-[calc(100vh-100px)] justify-center">
