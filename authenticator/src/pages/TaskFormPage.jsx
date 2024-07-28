@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const TaskFormPage = () => {
     const { register, handleSubmit, setValue } = useForm()
-    const { createTask, getTask } = useTask()
+    const { createTask, getTask, updateTask } = useTask()
     const navigate = useNavigate()
     const params = useParams()
 
@@ -22,7 +22,11 @@ const TaskFormPage = () => {
     }, [])
 
     const onSubmit = handleSubmit((data) => {
-        createTask(data)
+        if (params.id) {
+            updateTask(params.id, data)
+        } else {
+            createTask(data)
+        }
         navigate('/tasks')
     })
 
