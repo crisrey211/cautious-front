@@ -7,13 +7,13 @@ import TaskFormPage from './pages/TaskFormPage'
 import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './ProtectedRoute'
 import { TaskProvider } from './context/TasksContext'
-import Navbar from './components/Navbar'
+import NavbarCustom from '@components/Navbar'
 function App() {
     return (
         <AuthProvider>
             <TaskProvider>
                 <BrowserRouter>
-                    <Navbar />
+                    <NavbarCustom />
                     <Routes>
                         {/* Public routes */}
                         <Route path="/" element={<h1>Main page</h1>} />
