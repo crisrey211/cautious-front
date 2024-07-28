@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTask } from '../context/TasksContext'
+import TaskCard from '@components/TaskCard'
 
 const TaskPage = () => {
     const { getAllTasks, tasks } = useTask()
@@ -8,13 +9,10 @@ const TaskPage = () => {
     }, [])
     if (tasks.length == 0) return <h1>No tasks</h1>
     return (
-        <div>
+        <div className="grid grid-cols-3 gap-2">
             <h1>TaskPage</h1>
             {tasks.map((item) => (
-                <div key={item._id}>
-                    <h2>{item.title}</h2>
-                    <span>{item.description}</span>
-                </div>
+                <TaskCard task={item} key={item._id} />
             ))}
         </div>
     )
