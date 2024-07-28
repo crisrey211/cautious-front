@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTask } from '../context/TasksContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const TaskFormPage = () => {
-    const { register, handleSubmit } = useForm()
-    const { createTask } = useTask()
+    const { register, handleSubmit, setValue } = useForm()
+    const { createTask, getTask } = useTask()
     const navigate = useNavigate()
+    const params = useParams()
+
+    useEffect(() => {
+        async function loadTask() {
+            if (params.id) {
+                const task = await getTask(params.id)
+                setValue('title', task.title)
+                setValue('description', task.description)
+            }
+            console.log(params)
+        }
+        loadTask()
+    }, [])
 
     const onSubmit = handleSubmit((data) => {
         createTask(data)
@@ -29,7 +42,7 @@ const TaskFormPage = () => {
                     placeholder="Description"
                     {...register('description')}
                 />
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
             </form>
         </div>
     )

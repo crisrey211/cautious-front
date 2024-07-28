@@ -3,6 +3,7 @@ import { Button, Card } from 'flowbite-react'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { MdModeEditOutline } from 'react-icons/md'
 import { useTask } from '@context/TasksContext'
+import { Link } from 'react-router-dom'
 
 const TaskCard = ({ task }) => {
     const { deleteTask } = useTask()
@@ -23,9 +24,10 @@ const TaskCard = ({ task }) => {
                         >
                             <FaRegTrashAlt />
                         </Button>
-                        <Button size="xs" color={'blue'}>
+
+                        <Link to={`/tasks/${task._id}`}>
                             <MdModeEditOutline />
-                        </Button>
+                        </Link>
                     </div>
                 </header>
                 <p className="truncate text-sm text-gray-500 dark:text-gray-400">{task.description}</p>
