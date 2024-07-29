@@ -8,9 +8,11 @@ const NavbarCustom = () => {
     return (
         <Navbar fluid rounded>
             <Navbar.Brand href="https://flowbite-react.com">
-                <span className="self-center whitespace-nowrap text-xl font-semibold text-cyan-900 dark:text-white">
-                    Task Manager
-                </span>
+                <Link to={isAuthenticated ? '/tasks' : '/'}>
+                    <span className="self-center whitespace-nowrap text-xl font-semibold text-cyan-900 dark:text-white">
+                        Task Manager
+                    </span>
+                </Link>
             </Navbar.Brand>
             {isAuthenticated ? (
                 <React.Fragment>

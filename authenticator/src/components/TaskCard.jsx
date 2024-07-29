@@ -4,6 +4,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { MdModeEditOutline } from 'react-icons/md'
 import { useTask } from '@context/TasksContext'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 const TaskCard = ({ task }) => {
     const { deleteTask } = useTask()
@@ -32,7 +33,8 @@ const TaskCard = ({ task }) => {
                 </header>
                 <p className="truncate text-sm text-gray-500 dark:text-gray-400">{task.description}</p>
                 <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                    {new Date(task.date).toLocaleDateString()}
+                    {dayjs(task.date).utc().format('DD/MM/YYYY')}
+                    {/* {new Date(task.date).toLocaleDateString()} DONT WORK*/}
                     {/* <p>{task.date.toLocaleString()}</p> */}
                 </p>
             </div>
