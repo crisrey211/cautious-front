@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
 
 const LoginPage = () => {
     const {
@@ -19,55 +20,48 @@ const LoginPage = () => {
 
     //when login is correct navigate to Tasks Page
     useEffect(() => {
-        if (isAuthenticated) navigate("/tasks")
+        if (isAuthenticated) navigate('/tasks')
     }, [isAuthenticated])
 
     return (
         <div className="flex items-center h-[calc(100vh-100px)] justify-center">
             <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
                 {singupErrors.map((error, index) => (
-                    <div
-                        className="bg-red-500 p-2 m-2 text-white text-center"
-                        key={index}
-                    >
+                    <div className="bg-red-500 p-2 m-2 text-white text-center" key={index}>
                         {error}
                     </div>
                 ))}
                 <h1 className="text-2xl font-bold">Login</h1>
                 <form
-                    className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                    className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex max-w-md flex-col gap-4"
                     onSubmit={onSubmit}
                 >
-                    <div className="mb-4">
-                        <input
-                            placeholder="Email"
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="email1" value="Your email" />
+                        </div>
+                        <TextInput
+                            id="email1"
                             type="email"
-                            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="Email"
                             {...register('email', { required: true })}
                         />
                     </div>
-                    {errors.email && (
-                        <p className="text-red-600">Email is required</p>
-                    )}
-                    <div className="mb-6">
-                        <input
+                    {errors.email && <p className="text-red-600">Email is required</p>}
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="password1" value="Your password" />
+                        </div>
+                        <TextInput
+                            id="password1"
                             placeholder="Password"
                             type="password"
-                            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             {...register('password', { required: true })}
                         />
                     </div>
-                    {errors.password && (
-                        <p className="text-red-600">Password is required</p>
-                    )}
-                    <div className="flex items-center justify-between">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                    </div>
+
+                    {errors.password && <p className="text-red-600">Password is required</p>}
+                    <Button type="submit">Login</Button>
                 </form>
                 <p className="flex gap-x-2 justify-between">
                     Don't have an account?{' '}

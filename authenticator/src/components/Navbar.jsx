@@ -5,6 +5,7 @@ import { Button, Navbar } from 'flowbite-react'
 
 const NavbarCustom = () => {
     const { isAuthenticated, logOut, user } = useAuth()
+    console.log(user)
     return (
         <Navbar fluid rounded>
             <Navbar.Brand href="https://flowbite-react.com">
