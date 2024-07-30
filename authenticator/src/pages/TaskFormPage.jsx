@@ -20,7 +20,6 @@ const TaskFormPage = () => {
                 setValue('description', task.description)
                 setValue('date', dayjs(task.date).utc().format('YYYY-MM-DD'))
             }
-            console.log(params)
         }
         loadTask()
     }, [])

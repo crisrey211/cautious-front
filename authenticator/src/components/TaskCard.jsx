@@ -20,7 +20,6 @@ const TaskCard = ({ task }) => {
                             color={'failure'}
                             onClick={() => {
                                 deleteTask(task._id)
-                                console.log(task._id)
                             }}
                         >
                             <FaRegTrashAlt />

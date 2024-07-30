@@ -21,8 +21,8 @@ export const AuthProvider = ({ children }) => {
     const signup = async (user) => {
         try {
             const res = await registerRequest(user)
-            setUser(res.data)
             setIsAuthenticated(true)
+            setUser(res.data)
             setLoading(false)
         } catch (error) {
             setErrors(error.response.data)
@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }) => {
     const signin = async (user) => {
         try {
             const res = await loginRequest(user)
-            console.log(res)
             setIsAuthenticated(true)
             setUser(res.data)
             setLoading(false)
@@ -62,7 +61,6 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkLogin = async () => {
             const cookies = Cookies.get()
-            console.log('cookies ==>', cookies)
 
             if (!cookies.token) {
                 console.log('No hay token')
@@ -74,7 +72,6 @@ export const AuthProvider = ({ children }) => {
 
             try {
                 const res = await verifyTokenRequest(cookies.token)
-                console.log('Respuesta:', res)
 
                 if (res.data) {
                     setIsAuthenticated(true)
@@ -92,7 +89,6 @@ export const AuthProvider = ({ children }) => {
             }
         }
 
-        console.log('Lanzar checkLogin')
         checkLogin()
     }, [])
 
