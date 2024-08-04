@@ -19,35 +19,43 @@ const NavbarCustom = () => {
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li className="text-2xl font-bold text-cyan-950 dark:text-whit">Welcome {user.username}</li>
                         <li>
-                            <Button size={'xs'}>
-                                <Link to={'/add-task'}>Add Task</Link>
-                            </Button>
+                            <Link
+                                to={'/add-task'}
+                                className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                            >
+                                Add Task
+                            </Link>
                         </li>
                         <li>
-                            <Button size={'xs'}>
-                                <Link
-                                    to={'/'}
-                                    onClick={() => {
-                                        logOut()
-                                    }}
-                                >
-                                    Logout
-                                </Link>
-                            </Button>
+                            <Link
+                                className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                                to={'/'}
+                                onClick={() => {
+                                    logOut()
+                                }}
+                            >
+                                Logout
+                            </Link>
                         </li>
                     </ul>
                 </React.Fragment>
             ) : (
                 <React.Fragment>
                     <li>
-                        <Button size={'xs'}>
-                            <Link to={'/login'}>Login</Link>
-                        </Button>
+                        <Link
+                            to={'/login'}
+                            className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                        >
+                            Login
+                        </Link>
                     </li>
                     <li>
-                        <Button size={'xs'}>
-                            <Link to={'/register'}>Register</Link>
-                        </Button>
+                        <Link
+                            to={'/register'}
+                            className="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                        >
+                            Register
+                        </Link>
                     </li>
                 </React.Fragment>
             )}

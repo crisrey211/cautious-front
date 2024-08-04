@@ -8,16 +8,16 @@ import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './ProtectedRoute'
 import { TaskProvider } from './context/TasksContext'
 import NavbarCustom from '@components/Navbar'
+import HomePage from './pages/HomePage'
 function App() {
     return (
         <AuthProvider>
             <TaskProvider>
                 <BrowserRouter>
                     <main className="container mx-auto">
-                        <NavbarCustom />
                         <Routes>
                             {/* Public routes */}
-                            <Route path="/" element={<h1>Main page</h1>} />
+                            <Route path="/" element={<HomePage />} />
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/register" element={<RegisterPage />} />
 
