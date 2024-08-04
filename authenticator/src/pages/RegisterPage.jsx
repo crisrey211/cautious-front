@@ -22,8 +22,8 @@ const RegisterPage = () => {
     }, [isAuthenticated])
 
     return (
-        <div className="flex items-center h-[calc(100vh-100px)] justify-center">
-            <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+        <div className="flex items-center h-screen justify-center bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900">
+            <div className="backdrop-blur-sm bg-sky-400/30 max-w-md w-full p-10 rounded-md">
                 {registerError.map((error, index) => (
                     <div className="bg-red-500 p-2 text-white" key={index}>
                         {error}
