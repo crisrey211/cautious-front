@@ -10,10 +10,10 @@ const TaskCard = ({ task }) => {
     const { deleteTask } = useTask()
 
     return (
-        <Card className="max-w-sm">
-            <div className="min-w-0 flex-1">
-                <header className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white gap-3 justify-around">
-                    <p className="truncate text-sm font-medium text-gray-900 dark:text-white">{task.title}</p>
+        <div className="grid gap-4">
+            <div className="bg-muted p-4 rounded-lg">
+                <div className="inline-flex items-center justify-around">
+                    <p className="text-base font-medium">{task.title}</p>
                     <div className="flex gap-2">
                         <Button
                             size="xs"
@@ -24,20 +24,15 @@ const TaskCard = ({ task }) => {
                         >
                             <FaRegTrashAlt />
                         </Button>
-
                         <Link to={`/tasks/${task._id}`}>
-                            <MdModeEditOutline />
+                            <MdModeEditOutline color="#000_70" />
                         </Link>
                     </div>
-                </header>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">{task.description}</p>
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                    {dayjs(task.date).utc().format('DD/MM/YYYY')}
-                    {/* {new Date(task.date).toLocaleDateString()} DONT WORK*/}
-                    {/* <p>{task.date.toLocaleString()}</p> */}
-                </p>
+                    <p className="text-sm text-muted-foreground">{dayjs(task.date).utc().format('DD/MM/YYYY')}</p>
+                </div>
+                <p className="text-sm text-muted-foreground">{task.description}</p>
             </div>
-        </Card>
+        </div>
     )
 }
 
